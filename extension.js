@@ -26,10 +26,7 @@ function activate(context) {
 	
 		const editor = vscode.window.activeTextEditor;
 		let selectedCode = editor.document.getText(editor.selection);
-		const folderPath = vscode.workspace.workspaceFolders[0].uri.toString().split(":")[1];
-		
-		var destFiles = fs.readdirSync(folderPath + "/_functions");
-
+		// var destFiles = fs.readdirSync(folderPath + "/_functions");
 		// alwaysShow?: boolean
 		// description?: string
 		// detail?: string
@@ -40,17 +37,22 @@ function activate(context) {
 		//Show the file chooser
 		
 		const openFileDialog = vscode.window.showOpenDialog({
-			canSelectFolders:false,
-			canSelectMany:false,
-			openLabel:"Append"
+			// canSelectFolders:false,
+			// canSelectMany:false,
+			// openLabel:"Append"
 		}).then(function(selection){
 			for(var select in selection){
 
 				fs.appendFile(selection[select].path,"\n" + selectedCode + "\n", function(err){
 					vscode.window.showInformationMessage(err.message);
 				});
+
+				vscode.window.showInformationMessage(`Content copied`);
 			}
 		});
+
+
+		vscode.window.showInformationMessage("Done!");
 		
 
 		// const result = vscode.window.showQuickPick(destFiles, {
