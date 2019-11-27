@@ -26,62 +26,52 @@ function activate(context) {
 	
 		const editor = vscode.window.activeTextEditor;
 		let selectedCode = editor.document.getText(editor.selection);
-		// var destFiles = fs.readdirSync(folderPath + "/_functions");
-		// alwaysShow?: boolean
-		// description?: string
-		// detail?: string
-		// label: string
-		// picked?: boolean
+	
+		openDialogAndAppend(selectedCode, "Content Copied");
+
+
+
+	});
+
+
+	let movetext = vscode.commands.registerCommand("extension.moveText", function(){
+		const editor = vscode.window.activeTextEditor;
+		// console.log(editor.selection);
+		let selection = editor.selection;
+		let selectedCode = editor.document.getText(editor.selection);
+		
+
+
+		openDialogAndAppend(selectedCode, "Content Moved", function(){
+
+			let range = new vscode.Range(selection.start, selection.end);
+			editor.edit(builder=>{
+				builder.replace(range, "");
+			});
+		});
+
 
 		
-		//Show the file chooser
-		
-		const openFileDialog = vscode.window.showOpenDialog({
-			// canSelectFolders:false,
-			// canSelectMany:false,
-			// openLabel:"Append"
+	});
+
+
+	function openDialogAndAppend(selectedCode, successMessage, callback){
+		vscode.window.showOpenDialog({
+			canSelectFolders:false,
+			canSelectMany:false,
+			openLabel:"Append"
 		}).then(function(selection){
 			for(var select in selection){
 
 				fs.appendFile(selection[select].path,"\n" + selectedCode + "\n", function(err){
 					vscode.window.showInformationMessage(err.message);
 				});
-
-				vscode.window.showInformationMessage(`Content copied`);
+				vscode.window.showInformationMessage(successMessage);
 			}
-		});
-
-
-		vscode.window.showInformationMessage("Done!");
-		
-
-		// const result = vscode.window.showQuickPick(destFiles, {
-		// 	placeHolder: "file under /_functions to append this code to",
-		// 	onDidSelectItem: item => {}
-		// }).then(function(selection){
-		// 	// vscode.window.showInformationMessage(`You HAS SELECTED! ${selection}`);	
-		// 	// Do two things. Append the selected text to the file and 
-		// 	if(selectedCode != undefined && selectedCode.length > 0){
-				
-		// 		myCache.put("LastSelection", selection);
-
-		// 		fs.appendFile(folderPath + "/_functions/" + selection, selectedCode + "\n", function(err){
-		// 			vscode.window.showInformationMessage(err.message);
-		// 		});
-		// 	}
-
-		// 	else {
-		// 		vscode.window.showInformationMessage("Nothing Selected");
-		// 	}
-					
-
-		// });
-
-		// Display a message box to the user
-		// vscode.window.showInformationMessage(`Hello world ${openFileDialog}`);
-	});
-
+		}).then(callback);
+	}
 	context.subscriptions.push(disposable);
+	context.subscriptions.push(movetext);
 }
 exports.activate = activate;
 

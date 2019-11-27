@@ -1,9 +1,9 @@
 {
 	"name": "copy-selection-to",
-	"displayName": "Copy Selection To...",
-	"description": "Copies the code selected code into another file just by right clicking on it.",
+	"displayName": "Copy/Move Selection To...",
+	"description": "Copies or Moves the code selected code into another file just by right clicking on it.",
 	"publisher": "cmdhq",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"engines": {
 		"vscode": "^1.40.0"
 	},
@@ -21,8 +21,12 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.extractText",
+				"command": "extension.extractText", 
 				"title": "Copy selection to..."
+			},
+			{
+				"command": "extension.moveText",
+				"title": "Move selection to..."
 			}
 		],
 		"menus":{
@@ -31,6 +35,12 @@
 					"when":"resourceLangId == cfml",
 					"command": "extension.extractText",
 					"alt": "extension.extractText",
+					"group": "1_modification"
+				},
+				{
+					"when":"resourceLangId == cfml",
+					"command": "extension.moveText",
+					"alt": "extension.moveText",
 					"group": "1_modification"
 				}
 			]

@@ -1,4 +1,4 @@
-# code-extractor README
+# "Copy Selection To..." README
 
 This package allows you to select some code and right click copy it to a file you specify in the dialog. It's just a time saver for moving code from one file to another. 
 
@@ -13,7 +13,7 @@ No settings as yet.
 
 ## Known Issues
 
-In production the dialogue doesn\t appear as yet. 
+In production the dialogue doesn't appear as yet. 
 
 ## Release Notes
 
