@@ -3,7 +3,7 @@
 	"displayName": "Copy/Move Selection To...",
 	"description": "Copies or Moves the code selected code into another file just by right clicking on it.",
 	"publisher": "cmdhq",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"engines": {
 		"vscode": "^1.40.0"
 	},

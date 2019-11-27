@@ -58,17 +58,23 @@ function activate(context) {
 	function openDialogAndAppend(selectedCode, successMessage, callback){
 		vscode.window.showOpenDialog({
 			canSelectFolders:false,
-			canSelectMany:false,
+			canSelectMany:true,
 			openLabel:"Append"
 		}).then(function(selection){
+
+			//Loop through the files
 			for(var select in selection){
 
 				fs.appendFile(selection[select].path,"\n" + selectedCode + "\n", function(err){
 					vscode.window.showInformationMessage(err.message);
 				});
+				
 				vscode.window.showInformationMessage(successMessage);
 			}
-		}).then(callback);
+			if(selection != undefined){
+				callback();
+			}
+		});
 	}
 	context.subscriptions.push(disposable);
 	context.subscriptions.push(movetext);

@@ -19,6 +19,11 @@ In production the dialogue doesn't appear as yet.
 
 Just published! Like and subscribe! 
 
+### 0.0.5
+
+adding the ability to move the selected text to a file
+adding the ability to move/copy the selected text to multiple file
+
 ### 0.0.2
 
 Updating the readme
