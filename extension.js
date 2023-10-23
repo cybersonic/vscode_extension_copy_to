@@ -23,14 +23,10 @@ function activate(context) {
 	// The commandId parameter must match the command field in package.json
 	let disposable = vscode.commands.registerCommand('extension.extractText', function () {
 		// The code you place here will be executed every time your command is executed
-	
 		const editor = vscode.window.activeTextEditor;
 		let selectedCode = editor.document.getText(editor.selection);
 	
 		openDialogAndAppend(selectedCode, "Content Copied");
-
-
-
 	});
 
 
@@ -68,10 +64,9 @@ function activate(context) {
 				fs.appendFile(selection[select].path,"\n" + selectedCode + "\n", function(err){
 					vscode.window.showInformationMessage(err.message);
 				});
-				
 				vscode.window.showInformationMessage(successMessage);
 			}
-			if(selection != undefined){
+			if(selection != undefined && callback != undefined){
 				callback();
 			}
 		});
@@ -79,7 +74,7 @@ function activate(context) {
 	context.subscriptions.push(disposable);
 	context.subscriptions.push(movetext);
 }
-exports.activate = activate;
+// exports.activate = activate;
 
 // this method is called when your extension is deactivated
 function deactivate() {}

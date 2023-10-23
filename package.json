@@ -16,6 +16,7 @@
 	},
 	"activationEvents": [
 		"*"
+
 	],
 	"main": "./extension.js",
 	"contributes": {
@@ -32,13 +33,13 @@
 		"menus":{
 			"editor/context": [
 				{
-					"when":"resourceLangId == cfml",
+					
 					"command": "extension.extractText",
 					"alt": "extension.extractText",
 					"group": "1_modification"
 				},
 				{
-					"when":"resourceLangId == cfml",
+					
 					"command": "extension.moveText",
 					"alt": "extension.moveText",
 					"group": "1_modification"
